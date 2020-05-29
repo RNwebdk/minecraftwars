@@ -5,7 +5,7 @@ import Player from './player.js';
 
 export default class Game{
 	constructor(){
-		// this.preventInspectTools();
+		this.preventInspectTools();
 		this.gameBoardElement = document.getElementById('gameboard');
 
 
