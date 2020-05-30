@@ -224,8 +224,10 @@ export default class Game{
 		setTimeout(() => {
 			document.getElementById('backToStartMenu').addEventListener('click', () => {
 				this.gameOver = false;
-				document.getElementById('gameboard').style.width = '1024px';
-				document.getElementById('gameboard').style.height = '768px';
+				// document.getElementById('gameboard').style.width = '800px';
+				// document.getElementById('gameboard').style.height = '524px';
+				document.getElementById('gameboard').style.width = '900px';
+				document.getElementById('gameboard').style.height = '644px';
 				this.showGameMenu();
 			});
 		}, 1000)
