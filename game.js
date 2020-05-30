@@ -48,13 +48,20 @@ export default class Game{
 
 	showGameMenu(){
 		this.gameBoardElement.innerHTML = UI.startMenuTemplate();
-		document.getElementById("singleplayer").addEventListener('click', this.onGameStart.bind(this));
+		document.getElementById("easyMode").addEventListener('click', this.onGameStart.bind(this));
+		document.getElementById("hardcoreMode").addEventListener('click',this.onGameStart.bind(this));
+		document.getElementById("resetHighscore").addEventListener('click',this.resetHighscore.bind(this));
+		document.getElementById('rules').style.display = 'block';
 	}
 
-	onGameStart(){
+	onGameStart(e){
+		// get gamemode
+		this.gameMode = e.srcElement.dataset.gamemode;
+		console.log(this.gameMode);
+
 		this.player = new Player();
 		this.startNewGame();
-		
+		document.getElementById('rules').style.display = 'none';		
 	}
 
 	startNewGame(){
@@ -67,6 +74,32 @@ export default class Game{
 		// then swipe the scoreboard and "moves Left" from the top
 		UI.animate(document.getElementById('scoreboard'), 'swipeInTop');
 		Game.shuffle();
+		if (this.gameMode === "easy") {
+			this.showCardTip();
+		}
+	}
+
+	showCardTip(){
+		setTimeout(() => {
+			document.querySelectorAll('.memory-card').forEach(card => {
+				card.classList.add('flip');
+				this.lockBoard = true;
+			})
+		}, 1000);
+
+		setTimeout(() => {
+			document.querySelectorAll('.memory-card').forEach(card => {
+				card.classList.remove('flip');
+				this.lockBoard = false;
+			})
+		}, 5000);
+	}
+
+	resetHighscore(){
+		let resethighscore = confirm("You're about to delete your highscore, are you sure you wanna do that ?");
+		if (resethighscore) {
+			window.localStorage.setItem('highscore', 0);
+		}
 	}
 
 	onFlip(e){
@@ -191,6 +224,8 @@ export default class Game{
 		setTimeout(() => {
 			document.getElementById('backToStartMenu').addEventListener('click', () => {
 				this.gameOver = false;
+				document.getElementById('gameboard').style.width = '1024px';
+				document.getElementById('gameboard').style.height = '768px';
 				this.showGameMenu();
 			});
 		}, 1000)

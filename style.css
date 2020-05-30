@@ -13,7 +13,7 @@
 }
 
 body{
-	height: 90vh;
+	min-height: 90vh;
 	background-image: url("img/backgroundcover.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -104,6 +104,14 @@ body{
 /*Next round button*/
 .mc-button#resetGameButton{
 	margin-top: 50%;
+}
+
+.mc-button#resetHighscore{
+	background-color: #F83535;
+}
+
+.mc-button#aboutGame{
+	background-color: #282923;
 }
 
 #gameoverWrapper{

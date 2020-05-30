@@ -10,7 +10,10 @@ export default class UI{
 	static startMenuTemplate(){
 		return `
 		<img src="img/minecraftwars.png" class="minecraftwars" alt="">
-		<button class="mc-button" id="singleplayer">Start Game</button>`;
+		<button class="mc-button" id="easyMode" data-gamemode="easy">Easy Mode</button>
+		<button class="mc-button" id="hardcoreMode" data-gamemode="hardcore">Hardcore Mode</button>
+		<button class="mc-button" id="resetHighscore">Reset Highscore</button>
+		<!--<button class="mc-button" id="aboutGame">Game Rules</button>-->`;
 	}
 
 	static scoreBoardTemplate(moves, score, highscore = 0){
@@ -56,6 +59,8 @@ export default class UI{
 
 			case 'swipeInRight':
 				setTimeout(() => {
+					element.style.width = '1024px';
+					element.style.height = '768px';
 					element.innerHTML = content;
 					element.classList.add('animate__animated', 'animate__bounceInRight');
 				}, 400);
