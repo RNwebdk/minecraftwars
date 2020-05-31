@@ -10,11 +10,39 @@ export default class UI{
 	static startMenuTemplate(){
 		return `
 		<img src="img/minecraftwars.png" class="minecraftwars" alt="">
-		<div id="version">Version 1.2</div>
+		<div id="version">Version 1.2B</div>
 		<button class="mc-button" id="easyMode" data-gamemode="easy">Easy Mode</button>
 		<button class="mc-button" id="hardcoreMode" data-gamemode="hardcore">Hardcore Mode</button>
 		<button class="mc-button" id="resetHighscore">Reset Highscore</button>
 		<!--<button class="mc-button" id="aboutGame">Game Rules</button>-->`;
+	}
+
+	static rules(gameMode){
+		if (gameMode == "easy") {
+			return `
+			<h2>Easy mode</h2>
+			<ol>
+				<li>The Game has 10 pairs of cards and you start with 10 lives</li>
+				<li>All cards are shown for a few seconds on start</li>
+				<li>Find all pairs before you lose your lives</li>
+				<li>lives resets to 10 every round</li>
+				<li>Pay attention to every move, it is crucial </li>
+				<li>Make highscore, beat highscore</li>
+			</ol>`;
+		}else if(gameMode == "hardcore"){
+			return `
+			<h2>Hardcore mode</h2>
+			<ol>
+				<li>The Game has 10 pairs of cards and you start with 5 lives</li>
+				<li>Finding a pairs will give a life</li>
+				<li>Fail and you'll lose a life</li>
+				<li>Pay attention to every move, it is crucial </li>
+				<li>Make highscore, beat highscore</li>
+			</ol>`;
+		} else if(gameMode == "resetHighscore"){
+			return `
+			<p>Reset all highscores in the game</p>`;
+		}
 	}
 
 	static scoreBoardTemplate(moves, score, highscore = 0){

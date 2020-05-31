@@ -47,19 +47,36 @@ export default class Game{
 
 
 	showGameMenu(){
+		//Game menu buttons
 		this.gameBoardElement.innerHTML = UI.startMenuTemplate();
 		document.getElementById("easyMode").addEventListener('click', this.onGameStart.bind(this));
 		document.getElementById("hardcoreMode").addEventListener('click',this.onGameStart.bind(this));
 		document.getElementById("resetHighscore").addEventListener('click',this.resetHighscore.bind(this));
+		
+		//Rules
+		this.onRulesHover();
+	}
+
+	onRulesHover(){
 		document.getElementById('rules').style.display = 'block';
+		document.getElementById("easyMode").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("easy");
+		});
+
+		document.getElementById("hardcoreMode").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("hardcore");
+		});
+
+		document.getElementById("resetHighscore").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("resetHighscore");
+		});
 	}
 
 	onGameStart(e){
 		// get gamemode
 		this.gameMode = e.srcElement.dataset.gamemode;
-		console.log(this.gameMode);
 
-		this.player = new Player();
+		this.player = new Player(this.gameMode);
 		this.startNewGame();
 		document.getElementById('rules').style.display = 'none';		
 	}
@@ -148,6 +165,9 @@ export default class Game{
 
 			if (this.hasGameEnded()) {
 				UI.animate(this.gameBoardElement, 'noAnimation', UI.resetGameButton());
+				if (this.gameMode === 'easy') {
+					this.player.resetLives();
+				}
 				this.onGameResetBoard();
 			}
 			
@@ -176,10 +196,33 @@ export default class Game{
 				"Minecraft-pling.mp3",
 				"Minecraft-levelup.mp3",
 				"Minecraft-explode1.mp3",
-				"Minecraft-break.mp3"
+				"Minecraft-break.mp3",
+				"anvil_break.ogg",
+				"anvil_land.ogg",
+				"anvil_use.ogg",
+				"bowhit1.ogg",
+				"anvil_break.ogg",
+				"bowhit1.ogg",
+				"bowhit2.ogg",
+				"bowhit3.ogg",
+				"bowhit4.ogg",
+				"break.ogg",
+				"chestclosed.ogg",
+				"chestopen.ogg",
+				"classic_hurt.ogg",
+				"door_close.ogg",
+				"door_open.ogg",
+				"explode2.ogg",
+				"explode3.ogg",
+				"explode4.ogg",
+				"glass1.ogg",
+				"glass2.ogg",
+				"glass3.ogg",
+				"orb.ogg",
+				"splash.ogg"
 			];
 
-			let random = Math.floor(Math.random() * 4); 
+			let random = Math.floor(Math.random() * 27); 
 
 			// console.log("random", random);
 			let audio = new Audio("img/sound/" +sounds[random]);

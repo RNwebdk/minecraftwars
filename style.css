@@ -25,11 +25,15 @@ body{
 #rules{
 	width: 28%;
 	margin: 0 auto;
-	background-color: #999999;
+	background-color: #07201C;
 	color:white;
 	padding: 10px 25px;
 	border: 2px solid black;
 	font-size: 20px;
+}
+
+#rules p {
+	text-align: center;
 }
 
 .memory-game {

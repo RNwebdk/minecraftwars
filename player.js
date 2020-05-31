@@ -1,16 +1,15 @@
 export default class Player{
-	constructor(){
+	constructor(gameMode){
+		this.gameMode = gameMode;
 		this.reset();
-		// this.score = 0;
-		// this.movesLeft = 4;
-		//Hardcore = 4
-		//Hard = 6
 	}
 
 
 	win(){
 		this.score += 10;
-		this.movesLeft += 1;
+		if (this.gameMode === "hardcore") {
+			this.movesLeft += 1;
+		}
 	}
 
 
@@ -32,7 +31,16 @@ export default class Player{
 	}
 
 	reset(){
-		this.score = 0;
-		this.movesLeft = 5;
+		if (this.gameMode === "easy") {
+			this.score = 0;
+			this.movesLeft = 10;
+		} else if (this.gameMode === "hardcore"){
+			this.score = 0;
+			this.movesLeft = 5;
+		}
+	}
+
+	resetLives(){
+		this.movesLeft = 10;
 	}
 }
