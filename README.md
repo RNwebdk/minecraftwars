@@ -17,3 +17,7 @@ Hardcore mode
 - Fail and you'll lose a life
 - Pay attention to every move, it is crucial
 - Make highscore, beat highscore
+
+
+Comming soon:
+Working on a multiplayer feature, both on one computer and multiple computers
