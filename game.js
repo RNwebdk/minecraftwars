@@ -8,32 +8,10 @@ export default class Game{
 		this.preventInspectTools();
 		this.gameBoardElement = document.getElementById('gameboard');
 
+		this.randomAndUniqueCards();
 
 		this.cards = [];
-		this.frontFaceIcons = [
-			'diamondOre.png', 
-			'diamondOre.png', 
-			'coalOre.png', 
-			'coalOre.png', 
-			'emeraldOre.png',
-			'emeraldOre.png',
-			'goldOre.png',
-			'goldOre.png',
-			'ironOre.png',
-			'ironOre.png',
-			'redstoneOre.png',
-			'redstoneOre.png',
-			'craftingTable.png',
-			'craftingTable.png',
-			'bookshelf.png',
-			'bookshelf.png',
-			'furnace.gif',
-			'furnace.gif',
-			'tnt.png',
-			'tnt.png'
-		];
 
-		this.setGameCards();
 
 		this.gameBoardElement;
 		window.localStorage.getItem('highscore') ? window.localStorage.getItem('highscore') : window.localStorage.setItem('highscore', 0);
@@ -54,11 +32,11 @@ export default class Game{
 		document.getElementById("resetHighscore").addEventListener('click',this.resetHighscore.bind(this));
 		
 		//Rules
+		document.getElementById('rules').style.display = 'block';
 		this.onRulesHover();
 	}
 
 	onRulesHover(){
-		document.getElementById('rules').style.display = 'block';
 		document.getElementById("easyMode").addEventListener('mouseover', () => {
 			document.getElementById('rules').innerHTML = UI.rules("easy");
 		});
@@ -70,6 +48,20 @@ export default class Game{
 		document.getElementById("resetHighscore").addEventListener('mouseover', () => {
 			document.getElementById('rules').innerHTML = UI.rules("resetHighscore");
 		});
+
+		document.getElementById("easyMode").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+
+		document.getElementById("hardcoreMode").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+
+		document.getElementById("resetHighscore").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+
+		
 	}
 
 	onGameStart(e){
@@ -160,7 +152,7 @@ export default class Game{
 		if (isMatch) {
 			this.removePairFromBoard();
 			this.player.win();
-			this.updateScoreAndMovesLeft();
+			this.updateScoreAndLivesLeft();
 			this.takeANewGuess();
 
 			if (this.hasGameEnded()) {
@@ -176,7 +168,7 @@ export default class Game{
 		}else{
 			this.unflipCards();
 			this.player.lose();
-			this.updateScoreAndMovesLeft();
+			this.updateScoreAndLivesLeft();
 
 			// check if game is over
 			this.checkGameOver();
@@ -230,7 +222,7 @@ export default class Game{
 		}, 1500);
 	}
 
-	updateScoreAndMovesLeft(){
+	updateScoreAndLivesLeft(){
 		// Update score
 		document.getElementById('playerScore').innerHTML = this.player.getScore();
 
@@ -320,10 +312,58 @@ export default class Game{
 		
 	}
 
+	getIconsFromFolder(){
+		return new Promise((resolve, recject) => {
+			let xhr = new XMLHttpRequest();
+			xhr.open("GET", "img/cards", true);
+			xhr.responseType = 'document';
+			xhr.onload = () => {
+			  if (xhr.status === 200) {
+			    let elements = xhr.response.getElementsByTagName("a");
+			    let images = [];
+			    for (let x of elements) {
+			      if ( x.href.match(/\.(jpe?g|png|gif)$/) ) { 
+			      	let fileName = x.href.split('#').shift().split('?').shift().split('/').pop();
+			          // let img = document.createElement("img");
+			          // img.src = x.href;
+			          // document.body.appendChild(img);
+			          images.push(fileName);
+			      } 
+			    };
+
+				resolve(images);
+			  } 
+			  else {
+			    // alert('Request failed. Returned status of ' + xhr.status);
+			    recject();
+			  }
+			}
+			xhr.send()
+		})
+	}
+
+	randomAndUniqueCards(){
+		
+		this.getIconsFromFolder()
+		.then((images => {
+		
+			this.frontFaceIcons = [];
+			while(this.frontFaceIcons.length < 20){
+			    let random = Math.floor(Math.random() * images.length); 
+			    if(this.frontFaceIcons.indexOf(images[random]) === -1){
+			    	let image = images[random];
+			    	this.frontFaceIcons.push(image); 
+			    	this.frontFaceIcons.push(image);
+			    } 
+			}
+			// this.frontFaceIcons = output;
+			this.setGameCards();
+		}));
+	}
+
 	static shuffle(){
 		setTimeout(() => {
 			let gameCards = document.querySelectorAll(".memory-card");
-			// console.log(gameCards);
 			gameCards.forEach(card => {
 				let randomPos = Math.floor(Math.random() * 20);
 				card.style.order = randomPos;

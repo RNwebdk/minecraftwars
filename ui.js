@@ -2,7 +2,7 @@ export default class UI{
 	static cardTemplate(card){
 		return `
 		<div class="memory-card" data-framework="${card.icon}">
-			<img class="front-face" id="frontface${card.cardIndex}" data-cardIndex="${card.cardIndex}" src="img/${card.icon}" draggable="false" >
+			<img class="front-face" id="frontface${card.cardIndex}" data-cardIndex="${card.cardIndex}" src="img/cards/${card.icon}" draggable="false" >
 			<img class="back-face" data-cardIndex="${card.cardIndex}" alt="minecraft-card" src="img/minecraft.png" draggable="false" >
 		</div>`;
 	}
@@ -10,7 +10,7 @@ export default class UI{
 	static startMenuTemplate(){
 		return `
 		<img src="img/minecraftwars.png" class="minecraftwars" alt="">
-		<div id="version">Version 1.2B</div>
+		<div id="version">Version 1.2C</div>
 		<button class="mc-button" id="easyMode" data-gamemode="easy">Easy Mode</button>
 		<button class="mc-button" id="hardcoreMode" data-gamemode="hardcore">Hardcore Mode</button>
 		<button class="mc-button" id="resetHighscore">Reset Highscore</button>
@@ -42,6 +42,8 @@ export default class UI{
 		} else if(gameMode == "resetHighscore"){
 			return `
 			<p>Reset all highscores in the game</p>`;
+		} else if (gameMode == "info"){
+			return `<p>Hover on buttons for info</p>`;
 		}
 	}
 
