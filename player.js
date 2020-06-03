@@ -8,14 +8,14 @@ export default class Player{
 	win(){
 		this.score += 10;
 		if (this.gameMode === "hardcore") {
-			this.movesLeft += 1;
+			this.livesLeft += 1;
 		}
 	}
 
 
 	lose(){
 		// this.score -= 3;
-		this.movesLeft -= 1;
+		this.livesLeft -= 1;
 
 		if (isNaN(this.score) || this.score <= 0) {
 			this.score = 0;
@@ -26,21 +26,21 @@ export default class Player{
 		return this.score;
 	}
 
-	getMovesLeft(){
-		return this.movesLeft;
+	getLivesLeft(){
+		return this.livesLeft;
 	}
 
 	reset(){
 		if (this.gameMode === "easy") {
 			this.score = 0;
-			this.movesLeft = 10;
+			this.livesLeft = 10;
 		} else if (this.gameMode === "hardcore"){
 			this.score = 0;
-			this.movesLeft = 5;
+			this.livesLeft = 5;
 		}
 	}
 
 	resetLives(){
-		this.movesLeft = 10;
+		this.livesLeft = 10;
 	}
 }

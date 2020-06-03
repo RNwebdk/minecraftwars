@@ -11,9 +11,7 @@ export default class Game{
 		this.randomAndUniqueCards();
 
 		this.cards = [];
-
-
-		this.gameBoardElement;
+		this.gameBoardElement.addEventListener("click", this.onFlip.bind(this));
 		window.localStorage.getItem('highscore') ? window.localStorage.getItem('highscore') : window.localStorage.setItem('highscore', 0);
 		this.firstCard;
 		this.secondCard;
@@ -22,7 +20,6 @@ export default class Game{
 		this.gameOver = false;
 
 	}
-
 
 	showGameMenu(){
 		//Game menu buttons
@@ -36,34 +33,6 @@ export default class Game{
 		this.onRulesHover();
 	}
 
-	onRulesHover(){
-		document.getElementById("easyMode").addEventListener('mouseover', () => {
-			document.getElementById('rules').innerHTML = UI.rules("easy");
-		});
-
-		document.getElementById("hardcoreMode").addEventListener('mouseover', () => {
-			document.getElementById('rules').innerHTML = UI.rules("hardcore");
-		});
-
-		document.getElementById("resetHighscore").addEventListener('mouseover', () => {
-			document.getElementById('rules').innerHTML = UI.rules("resetHighscore");
-		});
-
-		document.getElementById("easyMode").addEventListener('mouseout', () => {
-			document.getElementById('rules').innerHTML = UI.rules("info");
-		});
-
-		document.getElementById("hardcoreMode").addEventListener('mouseout', () => {
-			document.getElementById('rules').innerHTML = UI.rules("info");
-		});
-
-		document.getElementById("resetHighscore").addEventListener('mouseout', () => {
-			document.getElementById('rules').innerHTML = UI.rules("info");
-		});
-
-		
-	}
-
 	onGameStart(e){
 		// get gamemode
 		this.gameMode = e.srcElement.dataset.gamemode;
@@ -74,7 +43,7 @@ export default class Game{
 	}
 
 	startNewGame(){
-		document.getElementById('scoreboard').innerHTML = UI.scoreBoardTemplate(this.player.getScore(), this.player.getMovesLeft(), window.localStorage.getItem('highscore'));
+		document.getElementById('scoreboard').innerHTML = UI.scoreBoardTemplate(this.player.getScore(), this.player.getLivesLeft(), window.localStorage.getItem('highscore'));
 
 		//swipe the cards first from the right
 		UI.animate(this.gameBoardElement, 'swipeOutLeft');
@@ -82,7 +51,7 @@ export default class Game{
 		
 		// then swipe the scoreboard and "moves Left" from the top
 		UI.animate(document.getElementById('scoreboard'), 'swipeInTop');
-		Game.shuffle();
+		// Game.shuffle();
 		if (this.gameMode === "easy") {
 			this.showCardTip();
 		}
@@ -157,6 +126,7 @@ export default class Game{
 
 			if (this.hasGameEnded()) {
 				UI.animate(this.gameBoardElement, 'noAnimation', UI.resetGameButton());
+				this.randomAndUniqueCards();
 				if (this.gameMode === 'easy') {
 					this.player.resetLives();
 				}
@@ -231,8 +201,8 @@ export default class Game{
 
 
 		// Update moves left
-		let movesLeft = document.getElementById('movesLeft');
-		movesLeft.innerHTML = this.player.getMovesLeft();
+		let livesLeft = document.getElementById('livesLeft');
+		livesLeft.innerHTML = this.player.getLivesLeft();
 
 	}
 
@@ -245,7 +215,7 @@ export default class Game{
 	}
 
 	checkGameOver(){
-		if (this.player.getMovesLeft() <= 0) {
+		if (this.player.getLivesLeft() <= 0) {
 			this.gameOver = true;
 		}
 	}
@@ -254,7 +224,7 @@ export default class Game{
 		UI.animate(this.gameBoardElement, 'bounceOutDown');
 		UI.animate(this.gameBoardElement, 'bounceIn', UI.gameOverTemplate(this.player.getScore()));
 		UI.animate(document.getElementById('playerScoreBox'), 'rotateOut');
-		UI.animate(document.getElementById('movesLeftBox'), 'rotateOut');
+		UI.animate(document.getElementById('livesLeftBox'), 'rotateOut');
 
 		setTimeout(() => {
 			document.getElementById('backToStartMenu').addEventListener('click', () => {
@@ -297,7 +267,7 @@ export default class Game{
 	}
 
 	setGameCards(){
-		this.gameBoardElement.addEventListener("click", this.onFlip.bind(this))
+		this.cards = [];
 		this.frontFaceIcons.forEach((icon, index) => {
 			this.cards.push(new Card(icon, index));
 		});
@@ -400,6 +370,48 @@ export default class Game{
 		document.addEventListener('contextmenu', function(event) {
 		  event.preventDefault();
 		});
+	}
+
+	onRulesHover(){
+		document.getElementById("easyMode").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("easy");
+		});
+
+		document.getElementById("hardcoreMode").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("hardcore");
+		});
+
+		document.getElementById("resetHighscore").addEventListener('mouseover', () => {
+			document.getElementById('rules').innerHTML = UI.rules("resetHighscore");
+		});
+
+		document.getElementById("easyMode").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+
+		document.getElementById("hardcoreMode").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+
+		document.getElementById("resetHighscore").addEventListener('mouseout', () => {
+			document.getElementById('rules').innerHTML = UI.rules("info");
+		});
+	}
+
+	debugStatus(){
+		console.log("----------------------------------");
+		console.log("CURRENT VARIABLE STATUS");
+		console.log("gameBoardElement", this.gameBoardElement);
+		console.log("firstCard", this.firstCard);
+		console.log("secondCard", this.secondCard);
+		console.log("hasFlippedCard", this.hasFlippedCard);
+		console.log("lockBoard", this.lockBoard);
+		console.log("gameOver", this.gameOver);
+		console.log("gameMode", this.gameMode);
+		console.log("player", this.player);
+		console.log("cards", this.cards)
+		console.log("frontFaceIcons", this.frontFaceIcons);
+		console.log("----------------------------------");
 	}
 
 }

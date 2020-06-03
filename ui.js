@@ -10,7 +10,7 @@ export default class UI{
 	static startMenuTemplate(){
 		return `
 		<img src="img/minecraftwars.png" class="minecraftwars" alt="">
-		<div id="version">Version 1.2C</div>
+		<div id="version">Version 1.3A</div>
 		<button class="mc-button" id="easyMode" data-gamemode="easy">Easy Mode</button>
 		<button class="mc-button" id="hardcoreMode" data-gamemode="hardcore">Hardcore Mode</button>
 		<button class="mc-button" id="resetHighscore">Reset Highscore</button>
@@ -50,7 +50,7 @@ export default class UI{
 	static scoreBoardTemplate(moves, score, highscore = 0){
 		return `
 		 <div id="playerScoreBox">Highscore: <span id="playerHighScore">${highscore}</span><br />Game Score: <span id="playerScore">${moves}</span></div>
-		 <div id="movesLeftBox">Lives left: <span id="movesLeft">${score}</span></div>`;
+		 <div id="livesLeftBox">Lives left: <span id="livesLeft">${score}</span></div>`;
 	}
 
 	static resetGameButton(){
