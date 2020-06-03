@@ -7,7 +7,6 @@ export default class Game{
 	constructor(){
 		this.preventInspectTools();
 		this.gameBoardElement = document.getElementById('gameboard');
-
 		this.randomAndUniqueCards();
 
 		this.cards = [];
@@ -51,7 +50,7 @@ export default class Game{
 		
 		// then swipe the scoreboard and "moves Left" from the top
 		UI.animate(document.getElementById('scoreboard'), 'swipeInTop');
-		// Game.shuffle();
+		Game.shuffle();
 		if (this.gameMode === "easy") {
 			this.showCardTip();
 		}
@@ -284,39 +283,106 @@ export default class Game{
 
 	getIconsFromFolder(){
 		return new Promise((resolve, recject) => {
-			let xhr = new XMLHttpRequest();
-			xhr.open("GET", "img/cards", true);
-			xhr.responseType = 'document';
-			xhr.onload = () => {
-			  if (xhr.status === 200) {
-			    let elements = xhr.response.getElementsByTagName("a");
-			    let images = [];
-			    for (let x of elements) {
-			      if ( x.href.match(/\.(jpe?g|png|gif)$/) ) { 
-			      	let fileName = x.href.split('#').shift().split('?').shift().split('/').pop();
-			          // let img = document.createElement("img");
-			          // img.src = x.href;
-			          // document.body.appendChild(img);
-			          images.push(fileName);
-			      } 
-			    };
+			// let xhr = new XMLHttpRequest();
+			// xhr.open("GET", "img/cards", true);
+			// xhr.responseType = 'document';
+			// xhr.onload = () => {
+			//   if (xhr.status === 200) {
+			//     let elements = xhr.response.getElementsByTagName("a");
+			//     let images = [];
+			//     for (let x of elements) {
+			//       if ( x.href.match(/\.(jpe?g|png|gif)$/) ) { 
+			//       	let fileName = x.href.split('#').shift().split('?').shift().split('/').pop();
+			//     	console.log(fileName);
+			//           // let img = document.createElement("img");
+			//           // img.src = x.href;
+			//           // document.body.appendChild(img);
+			//           images.push(fileName);
+			//       } 
+			//     };
 
-				resolve(images);
-			  } 
-			  else {
-			    // alert('Request failed. Returned status of ' + xhr.status);
-			    recject();
-			  }
-			}
-			xhr.send()
-		})
+			// 	resolve(images);
+			//   } 
+			//   else {
+			//     // alert('Request failed. Returned status of ' + xhr.status);
+			//     recject();
+			//   }
+			// }
+			// xhr.send()
+			let images = [
+				"Bottle_of_Enchanting.gif",
+				"Diamond_Sword.png",
+				"Iron_Sword.png",
+				"Music_Disc_13.png",
+				"Nether_Wart_Age_0.png",
+				"Painting.png",
+				"Ruby_Block.png",
+				"apple.png",
+				"beetroot.png",
+				"berries.png",
+				"boat.png",
+				"bone.png",
+				"book.png",
+				"bookshelf.png",
+				"bow.png",
+				"bread.png",
+				"brick.png",
+				"cake_JE2.png",
+				"cat.png",
+				"chicken.png",
+				"chicken_baby.png",
+				"clay.png",
+				"coalOre.png",
+				"cookedchicken.png",
+				"cookedsalmon.png",
+				"cookie.png",
+				"craftingTable.png",
+				"diamond.png",
+				"diamondOre.png",
+				"diamond_horse_armor.png",
+				"earthruby.png",
+				"egg.png",
+				"emerald.png",
+				"emeraldOre.png",
+				"furnace.gif",
+				"glass.png",
+				"glass_bottle.png",
+				"goldOre.png",
+				"golden_Sword.png",
+				"gondingot.png",
+				"ironOre.png",
+				"ironingot.png",
+				"lapis.png",
+				"lapisOre.png",
+				"lava.png",
+				"melon.png",
+				"melonslice.png",
+				"milk.png",
+				"minecart.png",
+				"pumpkin.png",
+				"randomblocksadntools.png",
+				"redstone.png",
+				"redstoneOre.png",
+				"redstoneandpickaxe.png",
+				"saddle.png",
+				"shears.png",
+				"slimeball.png",
+				"steak.png",
+				"sugar.png",
+				"sword.png",
+				"tnt.png",
+				"totem_of_undying.png",
+				"turtle.png",
+				"wheat.png"
+			];
+
+			resolve(images);
+		});
 	}
 
 	randomAndUniqueCards(){
-		
 		this.getIconsFromFolder()
 		.then((images => {
-		
 			this.frontFaceIcons = [];
 			while(this.frontFaceIcons.length < 20){
 			    let random = Math.floor(Math.random() * images.length); 
