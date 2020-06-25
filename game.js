@@ -50,6 +50,7 @@ export default class Game{
 		
 		// then swipe the scoreboard and "moves Left" from the top
 		UI.animate(document.getElementById('scoreboard'), 'swipeInTop');
+		console.log("shuffle the game");
 		Game.shuffle();
 		if (this.gameMode === "easy") {
 			this.showCardTip();
@@ -61,14 +62,14 @@ export default class Game{
 			document.querySelectorAll('.memory-card').forEach(card => {
 				card.classList.add('flip');
 				this.lockBoard = true;
-			})
+			});
 		}, 1000);
 
 		setTimeout(() => {
 			document.querySelectorAll('.memory-card').forEach(card => {
 				card.classList.remove('flip');
 				this.lockBoard = false;
-			})
+			});
 		}, 5000);
 	}
 
@@ -187,6 +188,7 @@ export default class Game{
 
 			// console.log("random", random);
 			let audio = new Audio("img/sound/" +sounds[random]);
+			audio.volume = 0.02;
 			audio.play();
 		}, 1500);
 	}
@@ -227,6 +229,8 @@ export default class Game{
 
 		setTimeout(() => {
 			document.getElementById('backToStartMenu').addEventListener('click', () => {
+				// get new cards for, for next game
+				this.randomAndUniqueCards();
 				this.gameOver = false;
 				// document.getElementById('gameboard').style.width = '800px';
 				// document.getElementById('gameboard').style.height = '524px';
@@ -369,13 +373,75 @@ export default class Game{
 				"slimeball.png",
 				"steak.png",
 				"sugar.png",
-				"sword.png",
 				"tnt.png",
 				"totem_of_undying.png",
 				"turtle.png",
-				"wheat.png"
-			];
+				"wheat.png",
+				"bat.gif",
+				"bee.gif",
+				"spider.png",
+				"wolf.png",
+				"ghast.png",
+				"chest.png",
+				"slime.png",
+				"magmacube.png",
+				"dragon.gif",
+				"wither.png",
+				"piglin.png",
+				"brewing_Stand.png",
+				"glowstonedust.png",
+				"bell.png",
+				"campfire.png",
+				"Pufferfish_large.gif",
+				"bed.png",
+				"Enchanting_Table.gif",
+				"dirt.png",
+				"anvil.png",
+				"compass.gif",
+				"map.png",
+				"enderpearl.png",
+				"eye_of_ender.png",
+				"blaze_powder.png",
+				"coal.png",
+				"oaklog.png",
+				"birchlogaxis.png",
+				"silverfish.gif",
+				"skeletonskull.png",
+				"zombiehead.png",
+				"playerhead.png",
+				"creeperhead.png",
+				"witherskeletonskull.png",
+				"dragonhead.png",
+				"spiderspawner.png",
+				"ladder.png",
+				"torch.png",
+				"endportalframe.png",
+				"soulsand.png",
+				"hanginglantern.gif",
+				"stonebricks.png",
+				"chiseledstonebricks.png",
+				"oakplank.png",
+				"mossycobblestone.png",
+				"door.png",
+				"irondoor.png",
+				"redflower.png",
+				"allium.png",
+				"brownmushroom.png",
+				"redmushroom.png",
+				"lilypad.png",
+				"sugarcane.png",
+				"ravager.png",
+				"goldenapple.gif",
+				"enchantedbook.gif",
+				"packedice.png",
+				"clock.gif",
+				"phantom.gif",
+				"cookedmutton.png",
+				"cookedrabbit.png",
+				"honey.png",
+				"pumpkinpie.png"
 
+			];
 			resolve(images);
 		});
 	}
@@ -385,14 +451,14 @@ export default class Game{
 		.then((images => {
 			this.frontFaceIcons = [];
 			while(this.frontFaceIcons.length < 20){
-			    let random = Math.floor(Math.random() * images.length); 
+			    let random = Math.floor(Math.random() * images.length);
 			    if(this.frontFaceIcons.indexOf(images[random]) === -1){
 			    	let image = images[random];
 			    	this.frontFaceIcons.push(image); 
 			    	this.frontFaceIcons.push(image);
 			    } 
 			}
-			// this.frontFaceIcons = output;
+			console.log(this.frontFaceIcons);
 			this.setGameCards();
 		}));
 	}

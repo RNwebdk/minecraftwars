@@ -13,8 +13,7 @@ export default class UI{
 		<div id="version">Version 1.3A</div>
 		<button class="mc-button" id="easyMode" data-gamemode="easy">Easy Mode</button>
 		<button class="mc-button" id="hardcoreMode" data-gamemode="hardcore">Hardcore Mode</button>
-		<button class="mc-button" id="resetHighscore">Reset Highscore</button>
-		<!--<button class="mc-button" id="aboutGame">Game Rules</button>-->`;
+		<button class="mc-button" id="resetHighscore">Reset Highscore</button>`;
 	}
 
 	static rules(gameMode){
