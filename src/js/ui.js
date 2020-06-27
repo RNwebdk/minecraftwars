@@ -1,4 +1,4 @@
-export default class UI{
+class UI{
 	static cardTemplate(card){
 		return `
 		<div class="memory-card" data-framework="${card.icon}">
@@ -130,7 +130,6 @@ export default class UI{
 
 			// Update "Moves Left"
 			case 'rubberBand':
-			console.log("rubber");
 				element.classList.add('animate__animated', 'animate__rubberBand');
 				element.innerHTML = content;
 

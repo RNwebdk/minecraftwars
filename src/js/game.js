@@ -1,9 +1,4 @@
-import Card from './card.js';
-import UI from './ui.js';
-import Player from './player.js';
-
-
-export default class Game{
+class Game{
 	constructor(){
 		this.preventInspectTools();
 		this.gameBoardElement = document.getElementById('gameboard');
@@ -50,7 +45,6 @@ export default class Game{
 		
 		// then swipe the scoreboard and "moves Left" from the top
 		UI.animate(document.getElementById('scoreboard'), 'swipeInTop');
-		console.log("shuffle the game");
 		Game.shuffle();
 		if (this.gameMode === "easy") {
 			this.showCardTip();
@@ -185,9 +179,8 @@ export default class Game{
 			];
 
 			let random = Math.floor(Math.random() * 27); 
-
-			// console.log("random", random);
-			let audio = new Audio("img/sound/" +sounds[random]);
+			
+			let audio = new Audio("sound/" +sounds[random]);
 			audio.volume = 0.02;
 			audio.play();
 		}, 1500);
@@ -458,7 +451,6 @@ export default class Game{
 			    	this.frontFaceIcons.push(image);
 			    } 
 			}
-			console.log(this.frontFaceIcons);
 			this.setGameCards();
 		}));
 	}
@@ -482,19 +474,14 @@ export default class Game{
 		document.addEventListener('keydown', (event) => {
 			event.preventDefault();
 			if (event.keyCode == 123) { // Prevent F12
-				console.log("Nope 12");
 				return;
-			}else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I  
-				console.log("Nope Ctrl+Shift+I");      
+			}else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I       
 		        return;
 		    } else if (event.ctrlKey && event.shiftKey && event.keyCode == 'I'.charCodeAt(0)){
-		    	console.log("Nope Ctrl+Shift+I");
 		    	return;
 		    }else if (event.ctrlKey && event.shiftKey && event.keyCode == 'J'.charCodeAt(0)){
-		    	console.log("Nope Ctrl+Shift+J");
 		    	return;
 		    }else if (event.ctrlKey && event.keyCode == 'U'.charCodeAt(0)){
-		    	console.log("Nope Ctrl+Shift+U");
 		    	return;
 		    }
 		});
