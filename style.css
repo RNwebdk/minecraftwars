@@ -37,14 +37,14 @@ body{
 }
 
 .memory-game {
-	width: 900px;
-	height: 644px;
-	margin: 1% auto;
-	display: flex;
-	flex-wrap: wrap;
-	perspective: 1000px;
-	z-index: 999999;
-
+  display: flex;
+  flex-wrap: wrap; /* This helps with responsiveness */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap;
+  flex: 0 1 auto; /* Do not grow, can shrink, and basis is auto */
+  width: 150px; /* Example fixed width, adjust as necessary */
+  margin: 10px; /* Adjust spacing */
 }
 
 #version{
@@ -150,13 +150,12 @@ body{
 /*Scoreboard*/
 
 #scoreboard{
-	position: absolute;
-	top: 0;
-	width: 100%;
-	padding: 20px;
-	font-size: 25px;
-	/*scoreboard is blocking click events on top cards (this makes sure click still works)*/
-	pointer-events: none;
+	display: flex;
+  	justify-content: space-around; /* Distribute space evenly */
+  	padding: 10px;
+ 	box-sizing: border-box; /* Include padding in the element's total width and height */
+ 	flex: 1; /* Allow them to grow equally */
+  	text-align: center; /* Center the text inside */
 }
 
 #playerScoreBox{
@@ -171,3 +170,24 @@ body{
 	padding: 50px;
 }
 
+
+@media (max-width: 600px) {
+  .memory-game {
+    flex-direction: column;
+    width: 100px; /* Smaller width on smaller screens */
+    margin: 5px;
+  }
+
+   #scoreboard {
+    flex-direction: column;
+  }
+
+  #playerScoreBox, #livesLeftBox {
+    font-size: 14px; /* Smaller font size for smaller screens */
+    margin: 5px 0; /* Adjust spacing for a vertical stack */
+    background-color: #f0f0f0; /* Light background for contrast */
+  	color: #333; /* Dark text for readability */
+  	padding: 5px;
+  	border-radius: 5px;
+  }
+}
