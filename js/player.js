@@ -1,4 +1,4 @@
-class Player{
+export default class Player{
 	constructor(gameMode){
 		this.gameMode = gameMode;
 		this.reset();

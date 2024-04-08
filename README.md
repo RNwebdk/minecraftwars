@@ -1,4 +1,5 @@
-It started with a regular game of memory, but then got boring very fast. So I made a mix of lives and points to make it more interesting, challenging and fun and ended up with a pretty good result, for a first game.
+It started with a regular game of memory, but then got boring very fast. So I made a mix of lives and points to make it more interesting, challenging and fun and ended up with a pretty good result, for a first game. 
+
 My kid asked me why I use so much time on the computer and when i told him that I was programming, he didn't really understand, so I wanted to show him what a programmer was able to do. Maybe this will motivate him in the future to start coding himself. I sure hope he'll follow my footsteps one day :)
 
 Game Rules:
@@ -19,7 +20,5 @@ Hardcore mode
 - Make highscore, beat highscore
 
 
-Comming soon: Working on a multiplayer feature, both on one computer and multiple computers
-
-Try it out here
-https://rnwebdk.github.io/minecraftwars/
+Comming soon:
+Working on a multiplayer feature, both on one computer and multiple computers

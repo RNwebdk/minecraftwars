@@ -1,4 +1,8 @@
-class Game{
+import UI from './ui.js';
+import Card from './card.js';
+import Player from './player.js';
+
+export default class Game{
 	constructor(){
 		this.preventInspectTools();
 		this.gameBoardElement = document.getElementById('gameboard');

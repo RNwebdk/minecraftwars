@@ -1,4 +1,4 @@
-class UI{
+export default class UI{
 	static cardTemplate(card){
 		return `
 		<div class="memory-card" data-framework="${card.icon}">
